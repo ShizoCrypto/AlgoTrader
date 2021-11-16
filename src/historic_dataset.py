@@ -21,7 +21,4 @@ class DatasetCreation:
             wr = csv.writer(emptyfile)
             for line in bars:
                 wr.writerow(line)
-        #self.client.API_URL = 'https://testnet.binance.vision/api'
-        #BTC_guild = self.client.get_asset_balance(asset='BTC')['free']
-        #print("I HAVE: {}".format(BTC_guild))
         return filename
