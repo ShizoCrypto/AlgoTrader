@@ -43,16 +43,18 @@ BTCUSDT = historic_prices.HistoricPrices(TRADING_PAIR_FIRST + TRADING_PAIR_SECON
 print('Opening file for reading...')
 with open(DATASET_FOLDER + filename) as dataset_csv:
     csv_reader = csv.reader(dataset_csv, delimiter=',')
-    line_count = 0
     for row in csv_reader:
         BTCUSDT.addTimestamp(row[BTCUSDT.TIMESTAMP])
         BTCUSDT.addOpenPrice(float(row[BTCUSDT.OPEN]))
         BTCUSDT.addHighPrice(float(row[BTCUSDT.HIGH]))
         BTCUSDT.addLowPrice(float(row[BTCUSDT.LOW]))
         BTCUSDT.addClosePrice(float(row[BTCUSDT.CLOSE]))
+        BTCUSDT.addVolume(float(row[BTCUSDT.VOLUME]))
 
 print('CSV reading completed for ' + DATASET_FOLDER + filename)
 
+
+########################## ALGORITHMS BELOW THIS POINT ##############################
 second_pair_amount = 10000
 first_pair_amount = (second_pair_amount/BTCUSDT.closePrices[0]) * .9999
 first_pair_amount = (first_pair_amount * BTCUSDT.closePrices[-1]) * .9999

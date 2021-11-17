@@ -6,7 +6,7 @@ TEST_API_SECRET = 'm65ubCeQJb1Jf0AOPP37NhXLclmzd6ifuzU9YtMVLpOq5WYLCR0ygs15z7gbs
 API_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 API_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
-CREATE_DATASET = True
+CREATE_DATASET = False
 
 TEST_MODE = True
 
