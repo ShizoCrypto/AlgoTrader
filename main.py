@@ -1,23 +1,22 @@
-import os
 from binance.client import Client
 from binance.streams import BinanceSocketManager
 from twisted.internet import reactor
 from src import historic_dataset
 from src import historic_prices
 import csv
-from src.config import TEST_API_KEY
-from src.config import TEST_API_SECRET
-from src.config import API_KEY
-from src.config import API_SECRET
-from src.config import TEST_MODE
-from src.config import CREATE_DATASET
-from src.config import TRADING_PAIR_FIRST
-from src.config import TRADING_PAIR_SECOND
-from src.config import TIME_INTERVAL
-from src.config import START_DATE_DAY
-from src.config import START_DATE_MONTH
-from src.config import START_DATE_YEAR
-from src.config import DATASET_FOLDER
+from config import TEST_API_KEY
+from config import TEST_API_SECRET
+from config import API_KEY
+from config import API_SECRET
+from config import TEST_MODE
+from config import CREATE_DATASET
+from config import TRADING_PAIR_FIRST
+from config import TRADING_PAIR_SECOND
+from config import TIME_INTERVAL
+from config import START_DATE_DAY
+from config import START_DATE_MONTH
+from config import START_DATE_YEAR
+from config import DATASET_FOLDER
 
 api_key = ''
 api_secret = ''
