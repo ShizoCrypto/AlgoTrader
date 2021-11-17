@@ -128,6 +128,19 @@ class HistoricPrices:
                 tempvals.popleft()
         return self.movingAverage
 
+    def sellFirst(self, amount, price, fee):
+        self.firstTradingPairBalance -= amount
+        self.secondTradingPairBalance += ((100-fee)/100) * amount * price
+
+    def buyFirstworthofSecond(self, amount, price, fee):
+        self.firstTradingPairBalance += (amount/price) * ((100-fee)/100)
+        self.secondTradingPairBalance -= amount
+
+    
+
+
+
+
 
 
     
