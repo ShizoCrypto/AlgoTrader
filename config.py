@@ -6,12 +6,14 @@ TEST_API_SECRET = 'm65ubCeQJb1Jf0AOPP37NhXLclmzd6ifuzU9YtMVLpOq5WYLCR0ygs15z7gbs
 API_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 API_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
-CREATE_DATASET = False
+CREATE_DATASET = True
 
 TEST_MODE = True
 
 TRADING_PAIR_FIRST = 'BTC'
+TRADING_PAIR_FIRST_BALANCE = '0'
 TRADING_PAIR_SECOND = 'USDT'
+TRADING_PAIR_SECOND_BALANCE = '10000'
 TIME_INTERVAL = '1d'
 
 START_DATE_DAY = '1'

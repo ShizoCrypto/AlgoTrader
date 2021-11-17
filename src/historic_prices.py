@@ -27,9 +27,32 @@ class HistoricPrices:
 
     movingAverage = []
 
-    def __init__(self, assetname):
+    def __init__(self, assetname, firstpair_bal, secondpair_bal):
         self._assetname = assetname
+        self._firstpair_bal = firstpair_bal
+        self._secondpair_bal = secondpair_bal
         self._kline_data = [[] for i in range(NUM_OF_COLS)]
+
+    @property
+    def TradingPair(self):
+        return self._assetname
+    @TradingPair.setter
+    def TradingPair(self,  trading_pair):
+        self._assetname = trading_pair
+
+    @property
+    def firstTradingPairBalance(self):
+        return self._firstpair_bal
+    @firstTradingPairBalance.setter
+    def firstTradingPairBalance(self,  firstpair_bal):
+        self._firstpair_bal = firstpair_bal
+
+    @property
+    def secondTradingPairBalance(self):
+        return self._secondpair_bal
+    @secondTradingPairBalance.setter
+    def _secondTradingPairBalance(self,  secondpair_bal):
+        self._secondpair_bal = secondpair_bal
 
     @property
     def Timestamps(self):
@@ -40,7 +63,6 @@ class HistoricPrices:
     def Timestamps(self, timestamps):
         self._kline_data[TIMESTAMP] = timestamps
 
-
     @property
     def openPrices(self):
         return self._kline_data[OPEN]
@@ -49,7 +71,6 @@ class HistoricPrices:
     @openPrices.setter
     def openPrices(self, openprices):
         self._kline_data[OPEN] = openprices
-
 
     @property
     def highPrices(self):
@@ -60,7 +81,6 @@ class HistoricPrices:
     def highPrices(self, highprices):
         self._kline_data[HIGH] = highprices
 
-    
     @property
     def lowPrices(self):
         return self._kline_data[LOW]
