@@ -1,19 +1,20 @@
 #config file - edit the below values with your details
 
-TEST_API_KEY = '60UzlMvGbIfhXIT55Ch6Wo1KDwY4ZVHcIgb04k3WqVRMSgAXP0IZqVGcoQjRDFec'
-TEST_API_SECRET = 'm65ubCeQJb1Jf0AOPP37NhXLclmzd6ifuzU9YtMVLpOq5WYLCR0ygs15z7gbse2p'
+TEST_API_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+TEST_API_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 API_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 API_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
-CREATE_DATASET = True
+CREATE_DATASET = False
 
 TEST_MODE = True
 
 TRADING_PAIR_FIRST = 'BTC'
-TRADING_PAIR_FIRST_BALANCE = '0'
+TRADING_PAIR_FIRST_BALANCE = 0
 TRADING_PAIR_SECOND = 'USDT'
-TRADING_PAIR_SECOND_BALANCE = '10000'
+TRADING_PAIR_SECOND_BALANCE = 10000
+EXCHANGE_FEE = 0 # %
 TIME_INTERVAL = '1d'
 
 START_DATE_DAY = '1'

@@ -51,64 +51,64 @@ class HistoricPrices:
     def secondTradingPairBalance(self):
         return self._secondpair_bal
     @secondTradingPairBalance.setter
-    def _secondTradingPairBalance(self,  secondpair_bal):
+    def secondTradingPairBalance(self,  secondpair_bal):
         self._secondpair_bal = secondpair_bal
 
     @property
     def Timestamps(self):
-        return self._kline_data[TIMESTAMP]
+        return self._kline_data[self.TIMESTAMP]
     def addTimestamp(self, timestamp):
-        self._kline_data[TIMESTAMP].append(timestamp)
+        self._kline_data[self.TIMESTAMP].append(timestamp)
     @Timestamps.setter
     def Timestamps(self, timestamps):
-        self._kline_data[TIMESTAMP] = timestamps
+        self._kline_data[self.TIMESTAMP] = timestamps
 
     @property
     def openPrices(self):
-        return self._kline_data[OPEN]
+        return self._kline_data[self.OPEN]
     def addOpenPrice(self, openprice):
-        self._kline_data[OPEN].append(openprice)
+        self._kline_data[self.OPEN].append(openprice)
     @openPrices.setter
     def openPrices(self, openprices):
-        self._kline_data[OPEN] = openprices
+        self._kline_data[self.OPEN] = openprices
 
     @property
     def highPrices(self):
-        return self._kline_data[HIGH]
+        return self._kline_data[self.HIGH]
     def addHighPrice(self, highprice):
-        self._kline_data[HIGH].append(highprice)
+        self._kline_data[self.HIGH].append(highprice)
     @highPrices.setter
     def highPrices(self, highprices):
-        self._kline_data[HIGH] = highprices
+        self._kline_data[self.HIGH] = highprices
 
     @property
     def lowPrices(self):
-        return self._kline_data[LOW]
+        return self._kline_data[self.LOW]
     def addLowPrice(self, lowprice):
-        self._kline_data[LOW].append(lowprice)
+        self._kline_data[self.LOW].append(lowprice)
     @lowPrices.setter
     def lowPrices(self, lowprices):
-        self._kline_data[LOW] = lowprices
+        self._kline_data[self.LOW] = lowprices
 
 
     @property
     def closePrices(self):
-        return self._kline_data[CLOSE]
+        return self._kline_data[self.CLOSE]
     def addClosePrice(self, closeprice):
-        self._kline_data[CLOSE].append(closeprice)
+        self._kline_data[self.CLOSE].append(closeprice)
     @closePrices.setter
     def closePrices(self, closeprices):
-        self._kline_data[CLOSE] = closeprices
+        self._kline_data[self.CLOSE] = closeprices
 
 
     @property
     def Volumes(self):
-        return self._kline_data[VOLUME]
+        return self._kline_data[self.VOLUME]
     def addVolume(self, volume):
-        self._kline_data[VOLUME].append(volume)
+        self._kline_data[self.VOLUME].append(volume)
     @Volumes.setter
     def Volumes(self, volumes):
-        self._kline_data[VOLUME] = volumes
+        self._kline_data[self.VOLUME] = volumes
 
     def createMovingAverage(self, prices, interval): # length = 20, interval is 5
         self.movingAverage = []
@@ -128,13 +128,43 @@ class HistoricPrices:
                 tempvals.popleft()
         return self.movingAverage
 
-    def sellFirst(self, amount, price, fee):
-        self.firstTradingPairBalance -= amount
-        self.secondTradingPairBalance += ((100-fee)/100) * amount * price
+    def sellFirstOfFirstValue(self, amount, price, fee):
+        if amount >= self.firstTradingPairBalance:
+            self.secondTradingPairBalance += ((100-fee)/100) * self.firstTradingPairBalance * price
+            self.firstTradingPairBalance -= self.firstTradingPairBalance
+        elif amount < self.firstTradingPairBalance and amount > 0:
+            self.secondTradingPairBalance += ((100-fee)/100) * amount * price
+            self.firstTradingPairBalance -= amount
+        
+    def buyFirstOfSecondValue(self, amount, price, fee):
+        if amount >= self.secondTradingPairBalance:
+            self.firstTradingPairBalance += ((100-fee)/100) * (self.secondTradingPairBalance / price)
+            self.secondTradingPairBalance -= self.secondTradingPairBalance
+        elif amount < self.secondTradingPairBalance and amount > 0:
+            self.firstTradingPairBalance += ((100-fee)/100) * (amount / price)
+            self.secondTradingPairBalance -= amount
+    
+    def sellFirstOfSecondValue(self, amount, price, fee):
+        if amount/price >= self.firstTradingPairBalance:
+            self.secondTradingPairBalance += ((100-fee)/100) * (self.firstTradingPairBalance * price)
+            self.firstTradingPairBalance -= self.firstTradingPairBalance
+        elif amount/price < self.firstTradingPairBalance:
+            self.secondTradingPairBalance += ((100-fee)/100) * amount
+            self.firstTradingPairBalance -= amount / price
 
-    def buyFirstworthofSecond(self, amount, price, fee):
-        self.firstTradingPairBalance += (amount/price) * ((100-fee)/100)
-        self.secondTradingPairBalance -= amount
+    def buyFirstOfFirstValue(self, amount, price, fee):
+        if amount*price >= self.secondTradingPairBalance:
+            self.firstTradingPairBalance += ((100-fee)/100) * self.secondTradingPairBalance/price
+            self.secondTradingPairBalance -= self.secondTradingPairBalance
+        elif amount*price < self.secondTradingPairBalance:
+            self.firstTradingPairBalance += ((100-fee)/100) * amount
+            self.secondTradingPairBalance -= amount * price
+
+
+        # self.firstTradingPairBalance += (amount/price) * ((100-fee)/100)
+        # self.secondTradingPairBalance -= amount
+
+
 
     
 

@@ -50,6 +50,20 @@ first_pair_amount = (BTCUSDT.secondTradingPairBalance/BTCUSDT.closePrices[0]) * 
 first_pair_amount = (first_pair_amount * BTCUSDT.closePrices[-1]) * .9999
 print('If you bought ' + str(BTCUSDT.secondTradingPairBalance) + ' ' + TRADING_PAIR_SECOND + ' of ' + TRADING_PAIR_FIRST + ' on ' \
     + startdate_str + ' it would now be worth: ' + str(first_pair_amount) + ' ' + TRADING_PAIR_SECOND + '.')
+########################## IF YOU BUY AND SELL EVERY INTERVAL ##############################
+for price_index in range(len(BTCUSDT.closePrices)):
+    if price_index != 0 and price_index != len(BTCUSDT.closePrices)-1:
+        if BTCUSDT.closePrices[price_index] > BTCUSDT.closePrices[price_index-1]:
+            BTCUSDT.buyFirstOfSecondValue(50, BTCUSDT.closePrices[price_index], EXCHANGE_FEE)
+        elif BTCUSDT.closePrices[price_index] < BTCUSDT.closePrices[price_index-1]:
+            BTCUSDT.sellFirstOfSecondValue(50, BTCUSDT.closePrices[price_index], EXCHANGE_FEE)
+    elif price_index == len(BTCUSDT.closePrices)-1:
+        BTCUSDT.sellFirstOfFirstValue(BTCUSDT.firstTradingPairBalance, BTCUSDT.openPrices[price_index], EXCHANGE_FEE)
+
+print('Final USDT balance is: ' + str(BTCUSDT.secondTradingPairBalance) + ' and final BTC balance is ' \
+    + str(BTCUSDT.firstTradingPairBalance))
+
+
 
 ########################## IF YOU BUY AND SELL EVERY INTERVAL ##############################
 close_prices = BTCUSDT.closePrices
