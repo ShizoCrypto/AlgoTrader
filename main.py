@@ -51,6 +51,9 @@ first_pair_amount = (first_pair_amount * BTCUSDT.closePrices[-1]) * .9999
 print('If you bought ' + str(BTCUSDT.secondTradingPairBalance) + ' ' + TRADING_PAIR_SECOND + ' of ' + TRADING_PAIR_FIRST + ' on ' \
     + startdate_str + ' it would now be worth: ' + str(first_pair_amount) + ' ' + TRADING_PAIR_SECOND + '.')
 ########################## IF YOU BUY AND SELL EVERY INTERVAL ##############################
+
+BTCUSDT.firstTradingPairBalance = 10000/BTCUSDT.closePrices[0]
+BTCUSDT.secondTradingPairBalance = 0
 for price_index in range(len(BTCUSDT.closePrices)):
     if price_index != 0 and price_index != len(BTCUSDT.closePrices)-1:
         if BTCUSDT.closePrices[price_index] > BTCUSDT.closePrices[price_index-1]:
