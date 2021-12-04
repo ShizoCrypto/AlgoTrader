@@ -1,5 +1,6 @@
 import os 
 import sys
+from typing_extensions import ParamSpecKwargs
 from binance.client import Client
 from binance.streams import BinanceSocketManager
 from twisted.internet import reactor
@@ -12,6 +13,12 @@ class DatasetCreation:
         self.api_key = api_key
         self.api_secret = api_secret
         self.client = Client(api_key, api_secret)
+
+    def createCSVFromList(self, folder, filename, data): # Will write the CSV as titles on the first row, and the data accordingly
+        with open(folder+filename, 'w', newline='') as emptyfile:
+            wr = csv.writer(emptyfile)
+            for line in data:
+                wr.writerow(line)
 
     def createCsvDataset(self, trading_pair, interval, start_date, dataset_folder):
         start_date_split = start_date.split(' ')
